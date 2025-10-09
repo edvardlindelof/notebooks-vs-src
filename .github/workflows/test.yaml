@@ -1,0 +1,23 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: mypy
+            command: mypy src
+          - name: pytest
+            command: pytest -vs
+    name: ${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.22"
+      - working-directory: processing
+        run: uv run ${{ matrix.command }}
