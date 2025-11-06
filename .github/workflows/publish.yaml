@@ -10,7 +10,9 @@ jobs:
   publish:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    working-directory: processing
+    defaults:
+      run:
+        working-directory: processing
     env:
       UV_INDEX_PRIVATE_REGISTRY_USERNAME: ${{ secrets.UV_INDEX_PRIVATE_REGISTRY_USERNAME }}
       UV_INDEX_PRIVATE_REGISTRY_PASSWORD: ${{ secrets.UV_INDEX_PRIVATE_REGISTRY_PASSWORD }}
