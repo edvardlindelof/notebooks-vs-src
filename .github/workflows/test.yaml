@@ -6,6 +6,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      UV_INDEX_PRIVATE_REGISTRY_USERNAME: ${{ secrets.UV_INDEX_PRIVATE_REGISTRY_USERNAME }}
+      UV_INDEX_PRIVATE_REGISTRY_PASSWORD: ${{ secrets.UV_INDEX_PRIVATE_REGISTRY_PASSWORD }}
     strategy:
       matrix:
         include:
