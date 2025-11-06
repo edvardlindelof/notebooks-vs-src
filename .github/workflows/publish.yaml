@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  workflow_run:
+    workflows: ["Test"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    env:
+      UV_INDEX_PRIVATE_REGISTRY_USERNAME: {{ secrets.UV_INDEX_PRIVATE_REGISTRY_USERNAME }}
+      UV_INDEX_PRIVATE_REGISTRY_PASSWORD: {{ secrets.UV_INDEX_PRIVATE_REGISTRY_PASSWORD }}
+      UV_PUBLISH_INDEX: private-registry
+      UV_PUBLISH_USERNAME: {{ secrets.UV_INDEX_PRIVATE_REGISTRY_USERNAME }}
+      UV_PUBLISH_PASSWORD: {{ secrets.UV_INDEX_PRIVATE_REGISTRY_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.22"
+      - run: |
+          version="$(date +%Y.%m.%d).${{ github.run_number }}"
+          echo "version=$version" >> "$GITHUB_ENV"
+      - run: echo $version
+      - name: Set version in pyproject.yaml
+        run: |
+          uvx --from=toml-cli@0.8.2 toml set \
+            --toml-path=pyproject.toml project.version $version
+      - run: uv build
+      - run: uv publish
