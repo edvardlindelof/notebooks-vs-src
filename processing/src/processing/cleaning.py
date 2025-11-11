@@ -1,7 +1,7 @@
 import pandas as pd
 
 def clean_people(people_raw: pd.DataFrame) -> pd.DataFrame:
-    """Clean."""
+    """Fix some formatting issues, e.g. make height an integer."""
     df = people_raw
 
     first_row = df.iloc[0]
