@@ -1,4 +1,4 @@
-name: "Publish $(date +%Y.%m.%d).${{ github.run_number }}"
+name: "Publish ${{ github.event.head_commit.timestamp }} #${{ github.run_number }}"
 
 on:
   workflow_run:
