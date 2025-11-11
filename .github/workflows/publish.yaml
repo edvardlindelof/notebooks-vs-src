@@ -1,5 +1,5 @@
 name: Publish
-run-name: "Publish ${{ format('{0}.{1}', replace(substring(github.event.workflow_run.run_started_at, 0, 10), '-', '.'), github.run_number) }}"
+run-name: "Publish ${{ format('{0}.{1}', join(split(substring(github.event.workflow_run.run_started_at, 0, 10), '-'), '.'), github.run_number) }}"
 
 on:
   workflow_run:
