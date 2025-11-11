@@ -1,6 +1,7 @@
 import pandas as pd
 
 def clean_people(people_raw: pd.DataFrame) -> pd.DataFrame:
+    """Clean."""
     df = people_raw
 
     first_row = df.iloc[0]
