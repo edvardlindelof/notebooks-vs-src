@@ -5,7 +5,7 @@ Small Python package for demonstrating [continuous](https://github.com/edvardlin
 `uv run --with jupyter jupyter lab`
 
 ## Understanding the continuous testing and publication
-Study [test.yaml](../.github/workflows/test.yaml) and [publish.yaml](.././github/workflows/publish.yaml) to understand the CICD. The index utilized by the present project is private. One way to adapt this to your own environment is to fork the repo, set up your own index (e.g. an Azure Artifact Feed), change pyproject.toml to point to the corresponding url and add `UV_INDEX_PRIVATE_REGISTRY_{REGISTRY,PASSWORD}` to the repo secrets.
+Study [test.yaml](../.github/workflows/test.yaml) and [publish.yaml](../.github/workflows/publish.yaml) to understand the CICD. The index utilized by the present project is private. One way to adapt this to your own environment is to fork the repo, set up your own index (e.g. an Azure Artifact Feed), change pyproject.toml to point to the corresponding url and add `UV_INDEX_PRIVATE_REGISTRY_{REGISTRY,PASSWORD}` to the repo secrets.
 
 ## Install dependencies
 This is handled automatically by `uv`, but here is how to do it explicitly for understanding or debugging.
